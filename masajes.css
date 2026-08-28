@@ -82,6 +82,29 @@ img { max-width: 100%; display: block; }
     radial-gradient(circle at 88% 5%, rgba(201, 138, 94, 0.16), transparent 42%),
     var(--arena);
 }
+
+/* Hero con carrusel de fotos de fondo, 100% automático */
+.hero.hero-carousel { background: var(--texto); padding: clamp(6.5rem, 13vw, 8.5rem) 0 clamp(3.5rem, 7vw, 5rem); }
+.hero.hero-carousel .carousel.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  border-radius: 0; box-shadow: none; aspect-ratio: auto; max-height: none; height: 100%;
+}
+.hero.hero-carousel .carousel.hero-bg .carousel-track,
+.hero.hero-carousel .carousel.hero-bg .carousel-slide { height: 100%; }
+.hero.hero-carousel .carousel.hero-bg .carousel-slide img { filter: brightness(0.55) saturate(1.05); }
+.hero.hero-carousel .carousel.hero-bg::after {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(54,47,38,0.55) 0%, rgba(54,47,38,0.72) 100%);
+}
+.hero.hero-carousel .carousel.hero-bg .carousel-dots { z-index: 2; bottom: 1.4rem; }
+.hero.hero-carousel .wrap { position: relative; z-index: 2; }
+.hero.hero-carousel .badge-demo { background: rgba(255,255,255,0.15); }
+.hero.hero-carousel .eyebrow { color: #f0c896; }
+.hero.hero-carousel h1 { color: #fff; }
+.hero.hero-carousel h1 span { color: #f0c896; }
+.hero.hero-carousel p.lead { color: #e8e0cf; }
+.hero.hero-carousel .btn-outline { border-color: #fff; color: #fff; }
+.hero.hero-carousel .trust-row { color: #e8e0cf; }
 .hero .badge-demo {
   display: inline-block; margin-bottom: 1.1rem; padding: 0.35rem 0.9rem;
   border-radius: 999px; background: var(--texto); color: #fff;
@@ -116,14 +139,27 @@ img { max-width: 100%; display: block; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 1.2rem; }
 .card {
   background: #fff; border: 1px solid var(--borde); border-radius: 1.2rem;
-  padding: 1.4rem; display: flex; flex-direction: column; gap: 0.6rem;
+  overflow: hidden; display: flex; flex-direction: column;
   box-shadow: 0 4px 14px rgba(54,47,38,0.05); transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
 .card:hover { box-shadow: var(--sombra); transform: translateY(-3px); }
+.card-photo { aspect-ratio: 4/3; overflow: hidden; }
+.card-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.card:hover .card-photo img { transform: scale(1.06); }
+.card-body { padding: 1.4rem; display: flex; flex-direction: column; gap: 0.6rem; flex-grow: 1; }
 .card .ico { font-size: 2rem; width: 3.1rem; height: 3.1rem; display: flex; align-items: center; justify-content: center; background: var(--arena-2); border-radius: 0.9rem; }
 .card h3 { font-family: "Inter", sans-serif; font-weight: 800; font-size: 1.05rem; }
 .card .desc { font-size: 0.88rem; color: var(--texto-suave); flex-grow: 1; }
 .card .duraciones { font-size: 0.82rem; font-weight: 700; color: var(--verde-osc); border-top: 1px dashed var(--borde); padding-top: 0.6rem; margin-top: 0.2rem; }
+
+/* Carrusel de fotos */
+.carousel { position: relative; border-radius: 1.1rem; overflow: hidden; box-shadow: var(--sombra); aspect-ratio: 16/9; max-height: 30rem; }
+.carousel-track { display: flex; height: 100%; transition: transform 0.5s ease; }
+.carousel-slide { flex: 0 0 100%; height: 100%; position: relative; }
+.carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+.carousel-dots { position: absolute; bottom: 0.9rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.5rem; }
+.carousel-dots button { width: 0.55rem; height: 0.55rem; border-radius: 50%; border: none; background: rgba(255,255,255,0.55); cursor: pointer; padding: 0; }
+.carousel-dots button.active { background: #fff; width: 1.4rem; border-radius: 999px; }
 
 .disclaimer {
   max-width: 40rem; margin: 2.2rem auto 0; text-align: center;

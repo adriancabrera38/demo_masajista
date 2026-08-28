@@ -8,6 +8,29 @@
     }, { threshold: 0.15 });
     revealEls.forEach((el) => io.observe(el));
 
+    // Carrusel de fotos del hero (100% automático)
+    document.querySelectorAll('.carousel').forEach((carousel) => {
+      const track = carousel.querySelector('.carousel-track');
+      const slides = carousel.querySelectorAll('.carousel-slide');
+      const dotsWrap = carousel.querySelector('.carousel-dots');
+      let index = 0;
+      let timer;
+
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        if (i === 0) dot.classList.add('active');
+        dotsWrap?.appendChild(dot);
+      });
+
+      function goTo(i) {
+        index = (i + slides.length) % slides.length;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dotsWrap?.querySelectorAll('button').forEach((d, di) => d.classList.toggle('active', di === index));
+      }
+      function next() { goTo(index + 1); }
+      timer = setInterval(next, 4500);
+    });
+
     // FAQ accordion
     document.querySelectorAll('.faq-item').forEach((item) => {
       item.querySelector('.faq-q')?.addEventListener('click', () => {
